@@ -98,7 +98,7 @@ def map_ints(acts):
 
 
 def flag_conflicts(lkp):
-    """Flag conflicts.
+    """Assign a set of flags to each activity: category, status, manual.
 
     Input:
     lkp -- a lookup dictionary of the form lkp[act_id][compd_id] = domain_name
@@ -107,12 +107,12 @@ def flag_conflicts(lkp):
     flag_lkp  = {}
     for act_id in lkp.keys():
         if len(lkp[act_id].keys()) == 1:
-            flag_lkp[act_id]=(0,0)
+            flag_lkp[act_id]=(0,0,0) # one validated domain.
         elif len(lkp[act_id].keys()) > 1:
             if len(set(lkp[act_id].values())) > 1:
-                flag_lkp[act_id] = (2,0)
+                flag_lkp[act_id] = (2,1,0) # multiple validated domains.
             elif len(set(lkp[act_id].values())) == 1:
-                flag_lkp[act_id] = (1,0)
+                flag_lkp[act_id] = (1,1,0) # multiple instances of one val. dom.
     return(lkp, flag_lkp)
 
 
@@ -132,7 +132,8 @@ def apply_manual(lkp, flag_lkp, infile):
         (act_id, compd_id, domain_name, comment) = line.rstrip().split('\t')
         try:
             lkp[act_id][compd_id][domain_name]
-            flag_lkp[act_id] = (0,1)
+            ctgr = flag_lkp[act_id][0]
+            flag_lkp[act_id]= (ctgr, 0, 1) # set status flag to 0 and manual flag to 1.
         except KeyError:
             print 'lost entry:', line
     return(lkp, flag_lkp)
@@ -148,15 +149,15 @@ def write_table(lkp, flag_lkp, path):
 
     """
     out = open(path, 'w')
-    out.write("map_id\tactivity_id\tcompd_id\tdomain_name\tconflict_flag\tmanual_flag\n")
+    out.write("map_id\tactivity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\n")
     counter = 0
     for act_id in lkp.keys():
         compd_ids = lkp[act_id]
-        (conflict_flag, manual_flag) = flag_lkp[act_id]
+        (category_flag, status_flag, manual_flag) = flag_lkp[act_id]
         for compd_id in compd_ids.keys():
             counter +=1
             domain_name = lkp[act_id][compd_id]
-            out.write("%(counter)i\t%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(conflict_flag)i\t%(manual_flag)i\n"%locals())
+            out.write("%(counter)i\t%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)\t%status_flag\t%(manual_flag)i\n"%locals())
     out.close()
 
 
@@ -172,7 +173,7 @@ def upload_sql(params):
     if status != 0:
         sys.exit("Error copying data/pfam_maps_v_%(version)s.tab to data/pfam_maps.txt" % params)
     status = os.system("mysql -u%(user)s -p%(pword)s -h%(host)s -P%(port)s -e 'DROP TABLE %(release)s.pfam_maps'" % params)
-    status = os.system("mysql -u%(user)s -p%(pword)s -h%(host)s -P%(port)s -e 'CREATE TABLE pfam_maps(map_id INT NOT NULL AUTO_INCREMENT, activity_id INT, compd_id INT, domain_name VARCHAR(100), conflict_flag INT, manual_flag INT, PRIMARY KEY (map_id))' %(release)s"% params)
+    status = os.system("mysql -u%(user)s -p%(pword)s -h%(host)s -P%(port)s -e 'CREATE TABLE pfam_maps(map_id INT NOT NULL AUTO_INCREMENT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, PRIMARY KEY (map_id))' %(release)s"% params)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
     os.system("mysqlimport -u%(user)s -p%(pword)s -h%(host)s -P%(port)s --ignore-lines=1 --lines-terminated-by='\n' --local %(release)s data/pfam_maps.txt" % params)
