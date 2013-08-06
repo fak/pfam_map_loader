@@ -113,7 +113,7 @@ def flag_conflicts(lkp):
                 flag_lkp[act_id] = (2,1,0) # multiple validated domains.
             elif len(set(lkp[act_id].values())) == 1:
                 flag_lkp[act_id] = (1,1,0) # multiple instances of one val. dom.
-    return(lkp, flag_lkp)
+    return flag_lkp
 
 
 def apply_manual(lkp, flag_lkp, infile):
@@ -136,7 +136,7 @@ def apply_manual(lkp, flag_lkp, infile):
             flag_lkp[act_id]= (ctgr, 0, 1) # set status flag to 0 and manual flag to 1.
         except KeyError:
             print 'lost entry:', line
-    return(lkp, flag_lkp)
+    return flag_lkp
 
 
 def write_table(lkp, flag_lkp, path):
@@ -205,12 +205,12 @@ def loader(release, version):
     # Map interactions to activity ids.
     lkp = map_ints(acts)
 
-   # Flag conflicts.
-    (lkp, flag_lkp) = flag_conflicts(lkp)
+    # Flag conflicts.
+    flag_lkp = flag_conflicts(lkp)
 
     # Apply manually resolved conflicts.
     infile = 'data/resolved_conflicts_v_%(version)s.tab' % locals()
-    (lkp, flag_lkp) = apply_manual(lkp, flag_lkp, infile)
+    flag_lkp = apply_manual(lkp, flag_lkp, infile)
 
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
     outfile = 'data/pfam_maps_v_%(version)s.tab' %locals()
