@@ -116,30 +116,8 @@ def flag_conflicts(lkp):
     return flag_lkp
 
 
-def apply_manual(lkp, flag_lkp, infile):
-    """Apply manually resolved conflicts.
 
-    Input:
-    lkp -- a dictionary of the form lkp[act_id][compd_id] = domain_name
-    flag_lkp -- a dictionary of the form flag_lkp[act_id] = (conflict_flag, manual_flag)
-    path -- a filepath to the resolved_conflicts table
-
-    """
-    infile = open(path, 'r')
-    lines = infile.readlines()
-    infile.close()
-    for line in lines[1:]:
-        (act_id, compd_id, domain_name, comment) = line.rstrip().split('\t')
-        try:
-            lkp[act_id][compd_id][domain_name]
-            ctgr = flag_lkp[act_id][0]
-            flag_lkp[act_id]= (ctgr, 0, 1) # set status flag to 0 and manual flag to 1.
-        except KeyError:
-            print 'lost entry:', line
-    return flag_lkp
-
-
-def write_table(lkp, flag_lkp, path):
+def write_table(lkp, flag_lkp, manuals, params, path):
     """ Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag.
 
     Input:
@@ -149,15 +127,17 @@ def write_table(lkp, flag_lkp, path):
 
     """
     out = open(path, 'w')
-    out.write("map_id\tactivity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\n")
+    out.write("""map_id\tactivity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\n""")
     counter = 0
-    for act_id in lkp.keys():
+    for act_id in set(lkp.keys()) - set(manuals.keys()): # Not processing maunal maps.
         compd_ids = lkp[act_id]
         (category_flag, status_flag, manual_flag) = flag_lkp[act_id]
+        comment = params['comment']
+        timestamp = params['timestamp']
         for compd_id in compd_ids.keys():
             counter +=1
             domain_name = lkp[act_id][compd_id]
-            out.write("%(counter)i\t%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)\t%status_flag\t%(manual_flag)i\n"%locals())
+            out.write("""%(counter)i\t%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\n"""%locals())
     out.close()
 
 
@@ -169,11 +149,11 @@ def upload_sql(params):
     params -- dictionary holding details of the connection string.
 
     """
-    status = os.system("cp data/pfam_maps_v_%(version)s.tab data/pfam_maps.txt" % params)
+    status = os.system("cp data/automatic_pfam_maps_v_%(version)s.tab data/pfam_maps.txt" % params)
     if status != 0:
         sys.exit("Error copying data/pfam_maps_v_%(version)s.tab to data/pfam_maps.txt" % params)
     status = os.system("mysql -u%(user)s -p%(pword)s -h%(host)s -P%(port)s -e 'DROP TABLE %(release)s.pfam_maps'" % params)
-    status = os.system("mysql -u%(user)s -p%(pword)s -h%(host)s -P%(port)s -e 'CREATE TABLE pfam_maps(map_id INT NOT NULL AUTO_INCREMENT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, PRIMARY KEY (map_id))' %(release)s"% params)
+    status = os.system("mysql -u%(user)s -p%(pword)s -h%(host)s -P%(port)s -e 'CREATE TABLE pfam_maps(map_id INT NOT NULL AUTO_INCREMENT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25),  PRIMARY KEY (map_id))' %(release)s"% params)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
     os.system("mysqlimport -u%(user)s -p%(pword)s -h%(host)s -P%(port)s --ignore-lines=1 --lines-terminated-by='\n' --local %(release)s data/pfam_maps.txt" % params)
@@ -181,7 +161,7 @@ def upload_sql(params):
         sys.exit("Error loading table pfam_maps.""" % params)
 
 
-def loader(release, version):
+def loader():
     """Main function to load the mapping of Pfam-A domains.
 
     Inputs from command line:
@@ -190,14 +170,17 @@ def loader(release, version):
 
 """
     # Read config file.
-    paramFile = open('mpf.yaml')
-    #paramFile = open('mpf_local.yaml')
-    #paramFile = open('mpf_example.yaml')
-    params = yaml.safe_load(paramFile)
+    param_file = open('local.yaml')
+    #param_file = open('example.yaml')
+    params = yaml.safe_load(param_file)
+    param_file.close()
 
     # Load the list of validated domains.
-    domains = readfile('data/valid_pfam_v_%(version)s.tab' % locals(), 'pfam_a', 'pfam_a')
+    domains = readfile('data/valid_pfam_v_%(version)s.tab' % params, 'pfam_a', 'pfam_a')
     dom_string = "','".join(domains.keys())
+
+    # Load a list of manually edited activities.
+    manuals = readfile('data/manual_pfam_maps_v_%(version)s.tab' % params, 'activity_id', 'manual_flag')
 
     # Get activities for domains.
     acts  = retrieve_acts(dom_string, params)
@@ -208,22 +191,17 @@ def loader(release, version):
     # Flag conflicts.
     flag_lkp = flag_conflicts(lkp)
 
-    # Apply manually resolved conflicts.
-    infile = 'data/resolved_conflicts_v_%(version)s.tab' % locals()
-    flag_lkp = apply_manual(lkp, flag_lkp, infile)
-
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
-    outfile = 'data/pfam_maps_v_%(version)s.tab' %locals()
-    write_table(lkp, flag_lkp, outfile)
+    outfile = 'data/automatic_pfam_maps_v_%(version)s.tab' %params
+    write_table(lkp, flag_lkp, manuals, params, outfile)
+    os.system('awk FNR-1 data/automatic_pfam_maps_v_%(version)s.tab data/manual_pfam_maps_v_%(version)s.tab > pfam_maps.txt' %params)
 
     # Load SQL table.
     upload_sql(params)
 
 if __name__ == '__main__':
     import sys
-    if len(sys.argv) != 3:  # the program name and the two arguments
-        sys.exit("Must specify release (eg. chembl_15) and version (eg. 0_1).")
-    release = sys.argv[1]
-    version = sys.argv[2]
+    if len(sys.argv) != 1:  # the program name and the two arguments
+        sys.exit("All parameters are specified in local.yaml or example.yaml, depending on line 173+174 ")
 
-    loader(release, version)
+    loader()
