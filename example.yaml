@@ -1,0 +1,8 @@
+--- # Params
+user: <enter user name>
+pword: <enter pword>
+host: <enter hostname or IP>
+port: <enter port>
+comment: 'originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/'
+timestamp: '06 Aug 2013 14:04:55'
+
