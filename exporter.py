@@ -81,7 +81,7 @@ def loader():
     path = 'data/manual_pfam_maps_v_%(nextversion)s.tab' %params
     write_table(acts, path)
 
-    # Load SQL table.
+    # Dump SQL table.
     bkp_sql(params)
 
 if __name__ == '__main__':
