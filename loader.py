@@ -73,7 +73,7 @@ def retrieve_acts(dom_string, params):
                        'pKi', 'pKd', 'pIC50', 'pEC50', 'pAC50'
                         )
                      AND dm.domain_name IN('%(dom_string)s')
-                     """ %locals() ,params['release'], params['user'], params['pword'], params['host'], params['port'])
+                     """ %locals() ,params )
     return acts
 
 

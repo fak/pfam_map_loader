@@ -24,7 +24,7 @@ def retrieve_acts(params):
     params -- dictionary holding details of the connection string
 
     """
-    acts = queryDevice.queryDevice("SELECT * from pfam_maps WHERE manual_flag = 1 " ,params['release'], params['user'], params['pword'], params['host'], params['port'])
+    acts = queryDevice.queryDevice("SELECT * from pfam_maps WHERE manual_flag = 1 " ,params)
     return acts
 
 
