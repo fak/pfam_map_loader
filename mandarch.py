@@ -5,7 +5,7 @@
     --------------------
     Felix A Kruger
     momo.sander@ebi.ac.uk
-"""                       
+"""
 ####
 #### import modules.
 ####
@@ -16,28 +16,20 @@ import yaml
 ####
 #### Load parameters.
 ####
-paramFile = open('mpf.yaml')
+paramFile = open('local.yaml')
 params = yaml.safe_load(paramFile)
-USER = params['user']
-PWORD = params['pword']
-HOST = params['host']
-PORT = params['port']
-RELEASE = params['release']
-TH = params['threshold']
-MIN_RES = params['min_res']
-MIN_RATIO = params['min_ratio']
-
+paramFile.close()
 ####
 #### Define functions.
 ####
-def get_el_targets(RELEASE, USER, PWORD, HOST, PORT):
-    """Query the ChEMBL database for (almost) all activities that are subject to the mapping. Does not conver activities expressed in log-conversion eg pIC50 etc. This function works with chembl_15 upwards. Outputs a list of tuples [(tid, target_type, domain_count, assay_count, act_count),...] 
+def get_el_targets(params):
+    """Query the ChEMBL database for (almost) all activities that are subject to the mapping. Does not conver activities expressed in log-conversion eg pIC50 etc. This function works with chembl_15 upwards. Outputs a list of tuples [(tid, target_type, domain_count, assay_count, act_count),...]
     """
     data = queryDevice.queryDevice("""
-            SELECT DISTINCT dc.tid, dc.target_type, dc.dc, COUNT(DISTINCT act.assay_id), COUNT(DISTINCT activity_id) 
-            FROM assays ass 
+            SELECT DISTINCT dc.tid, dc.target_type, dc.dc, COUNT(DISTINCT act.assay_id), COUNT(DISTINCT activity_id)
+            FROM assays ass
             JOIN(
-                      SELECT td.tid, td.target_type, COUNT(cd.domain_id) as dc 
+                      SELECT td.tid, td.target_type, COUNT(cd.domain_id) as dc
                       FROM target_dictionary td
                       JOIN target_components tc
                         ON tc.tid = td.tid
@@ -45,18 +37,18 @@ def get_el_targets(RELEASE, USER, PWORD, HOST, PORT):
 			ON cs.component_id = tc.component_id
                       JOIN component_domains cd
  			ON cd.component_id = cs.component_id
-                      WHERE td.target_type IN('SINGLE PROTEIN', 'PROTEIN COMPLEX')  
+                      WHERE td.target_type IN('SINGLE PROTEIN', 'PROTEIN COMPLEX')
                       GROUP BY td.tid
                      ) as dc
               ON dc.tid = ass.tid
-            JOIN activities act 
+            JOIN activities act
               ON act.assay_id = ass.assay_id
             WHERE act.standard_type IN('Ki','Kd','IC50','EC50', 'AC50')
-            AND ass.relationship_type = 'D' 
-            AND act.standard_relation IN('=', '<') 
-            AND standard_units = 'nM' 
+            AND ass.relationship_type = 'D'
+            AND act.standard_relation IN('=', '<')
+            AND standard_units = 'nM'
             AND standard_value < 50000
-            GROUP BY dc.tid ORDER BY COUNT(activity_id)""", RELEASE, USER, PWORD, HOST, PORT)
+            GROUP BY dc.tid ORDER BY COUNT(activity_id)""", params)
     return data
 
 
@@ -94,8 +86,6 @@ def get_archs(el_targets, pfam_lkp):
     dom_lkp = {}
     for ent in el_targets:
         doms = pfam_lkp[ent[0]]
-        if len(doms) <= 1:
-            continue
         arch = ', '.join(sorted(doms))
         try:
             arch_lkp[arch] += 1
@@ -103,6 +93,8 @@ def get_archs(el_targets, pfam_lkp):
         except KeyError:
             arch_lkp[arch] = 1
             act_lkp[arch] = ent[4]
+        if len(doms) <= 1:
+            continue
         for dom in set(doms):
             try:
                 dom_lkp[dom] += 1
@@ -111,8 +103,8 @@ def get_archs(el_targets, pfam_lkp):
     return(arch_lkp, dom_lkp, act_lkp)
 
 
-    
-def get_doms(tids):
+
+def get_doms(tids, params):
     """Get domains for a list of tids.
     Inputs:
     el_targets -- list of eligible targets
@@ -120,13 +112,13 @@ def get_doms(tids):
     pfam_lkp = {}
     tidstr = "', '".join(str(t) for t in tids)
     data = queryDevice.queryDevice("""
-            SELECT tid, domain_name 
+            SELECT tid, domain_name
             FROM target_components tc
 	    JOIN component_domains cd
 	      ON cd.component_id = tc.component_id
             JOIN domains d
 	      ON d.domain_id = cd.domain_id
-            WHERE tc.tid IN('%s')""" %tidstr, RELEASE, USER, PWORD, HOST, PORT)  
+            WHERE tc.tid IN('%s')""" %tidstr, params)
     for ent in data:
         tid = ent[0]
         dom = ent[1]
@@ -135,6 +127,22 @@ def get_doms(tids):
         except KeyError:
             pfam_lkp[tid] = [dom]
     return pfam_lkp
+
+def count_valid(lkp, valid_doms):
+    """Get count of architectures and activities covered by the mapping.
+    """
+    for arch in lkp.keys():
+        valid = False
+        doms = arch.split(', ')
+        for dom in doms:
+            if dom in valid_doms:
+                valid = True
+                break
+        lkp[arch] = (lkp[arch], valid)
+    valid = sum([x[0] for x in lkp.values() if x[1]])
+    allz = sum([x[0] for x in lkp.values()])
+    print valid, allz
+
 
 def export_archs(arch_lkp, valid_doms, path):
     '''Write out multi-domain architectures in markdown tables.
@@ -147,7 +155,9 @@ def export_archs(arch_lkp, valid_doms, path):
     out.write('|:-----------|:---------|-----:|\n')
     for arch in sorted_archs:
         doms = str(arch[0]).split(', ')
-        mapped = ', '.join([x for x in doms if x in valid_doms]) 
+        if len(doms) <= 1:
+            continue
+        mapped = ', '.join([x for x in doms if x in valid_doms])
         if len(mapped) == 0:
             mapped = False
         out.write("|%s|%s|%s|\n"%(arch[0], arch[1], mapped))
@@ -161,6 +171,8 @@ def export_network(arch_lkp, valid_doms, path):
     lkp = {}
     for arch in arch_lkp.keys():
         doms = arch.split(', ')
+        if len(doms) <= 1:
+            continue
         count = arch_lkp[arch]
         if type(doms) is str:
             continue
@@ -173,7 +185,7 @@ def export_network(arch_lkp, valid_doms, path):
                    lkp[dom_key] = count
     out = open('%s.tab' % path ,'w')
     out.write('dom_1\tdom_2\tcount\n')
-    for link in lkp.keys(): 
+    for link in lkp.keys():
         doms = str(link).split(', ')
         out.write("%s\t%s\t%s\n"%(doms[0], doms[1], lkp[link]))
     out.close()
@@ -189,6 +201,8 @@ def export_attribs(arch_lkp, valid_doms, path):
     lkp = {}
     for arch in arch_lkp.keys():
         doms = arch.split(', ')
+        if len(doms) <= 1:
+            continue
         for dom in doms:
             valid = False
             if dom in valid_doms:
@@ -212,7 +226,7 @@ def export_doms(dom_lkp, valid_doms, path):
         mapped = False
         count = dom[1]
         dom = str(dom[0])
-        if dom in valid_doms: 
+        if dom in valid_doms:
             mapped = True
         out.write("|%s|%s|%s|\n"%(dom, count, mapped))
 
@@ -226,19 +240,23 @@ def master(version):
     valid_dom_d = readfile('data/valid_pfam_v_%(version)s.tab' % locals(), 'pfam_a', 'pfam_a')
     valid_doms = valid_dom_d.keys()
     ## Load eligible targets.
-    el_targets = get_el_targets(RELEASE, USER, PWORD, HOST, PORT)
+    el_targets = get_el_targets(params)
     ## Get domains for tids.
-    pfam_lkp = get_domains([x[0] for x in el_targets])
+    pfam_lkp = get_doms([x[0] for x in el_targets], params)
     ## Add targets with given architecture.
     (arch_lkp, dom_lkp, act_lkp) = get_archs(el_targets, pfam_lkp)
+    ## Count valid acrchitectures
+    count_valid(arch_lkp, valid_doms)
+    ## Count valid activities
+    count_valid(act_lkp, valid_doms)
     ##  Write multi-domain architechtures to markdown tables.
-    export_archs(arch_lkp, valid_doms, 'data/multi_dom_archs_%s'% RELEASE)  
+    export_archs(arch_lkp, valid_doms, 'data/multi_dom_archs_%s'% params['release'])
     ## Write domains from multi-domain architechtures to markdown tables.
-    export_doms(dom_lkp, valid_doms, 'data/multi_dom_doms_%s'% RELEASE)
+    export_doms(dom_lkp, valid_doms, 'data/multi_dom_doms_%s'% params['release'])
     ## export network file.
-    export_network(arch_lkp, valid_doms, 'data/multi_dom_network_%s'% RELEASE)
+    export_network(arch_lkp, valid_doms, 'data/multi_dom_network_%s'% params['release'])
     ## export network attribute file.
-    export_attribs(arch_lkp, valid_doms, 'data/multi_dom_attributes_%s'% RELEASE)
+    export_attribs(arch_lkp, valid_doms, 'data/multi_dom_attributes_%s'% params['release'])
 if __name__ == '__main__':
         import sys
 
@@ -247,4 +265,4 @@ if __name__ == '__main__':
 		 	    version for data/valid_pfam_v_%(version)s.tab""")
         version = sys.argv[1]
 
-        master(version) 
+        master(version)
