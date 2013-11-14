@@ -164,7 +164,8 @@ def count_valid(lkp, valid_doms):
     comment = "only binding assays"
     release = params['release']
     threshold = params['threshold']
-    out.write("%(valid)s\t%(allz)s\t%(release)s\t%(threshold)s\t%(comment)s\t%(timestamp)s\t%(valid_archs)s\t%(all_archs)s\n" % locals())
+    out.write("%(valid)s\t%(allz)s\t%(release)s\t%(threshold)s\t%(comment)s\t%(timestamp)s\t%(valid_archs)s\t%(all_archs)s\n"
+            % locals())
     out.close()
 
 #-----------------------------------------------------------------------------------------------------------------------
