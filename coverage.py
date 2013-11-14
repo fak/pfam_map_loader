@@ -1,7 +1,7 @@
 """
-    Script:  mandarch.py
+    Script:  coverage.py
     Identifies domains that only occur in multi-domain proteins. The main
-    script is mandarch.
+    script is master.
     --------------------
     Felix A Kruger
     momo.sander@ebi.ac.uk
@@ -12,16 +12,21 @@
 import queryDevice
 import operator
 import yaml
-
+import time
 ####
 #### Load parameters.
 ####
 paramFile = open('local.yaml')
 params = yaml.safe_load(paramFile)
 paramFile.close()
-####
+
+
+
+
 #### Define functions.
-####
+#-----------------------------------------------------------------------------------------------------------------------
+
+
 def get_el_targets(params):
     """Query the ChEMBL database for (almost) all activities that are subject to the mapping. Does not conver activities expressed in log-conversion eg pIC50 etc. This function works with chembl_15 upwards. Outputs a list of tuples [(tid, target_type, domain_count, assay_count, act_count),...]
     """
@@ -45,12 +50,15 @@ def get_el_targets(params):
               ON act.assay_id = ass.assay_id
             WHERE act.standard_type IN('Ki','Kd','IC50','EC50', 'AC50')
             AND ass.relationship_type = 'D'
-            AND act.standard_relation IN('=', '<')
+            AND assay_type IN('B')
+            AND act.standard_relation IN('=')
             AND standard_units = 'nM'
-            AND standard_value < 50000
-            GROUP BY dc.tid ORDER BY COUNT(activity_id)""", params)
+            AND standard_value <= %s
+            GROUP BY dc.tid ORDER BY COUNT(activity_id)""" % (int(params['threshold']) * 1000) , params)
+    print "retrieved data for ", len(data), "tids."
     return data
 
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 def readfile(path, key_name, val_name):
@@ -75,6 +83,7 @@ def readfile(path, key_name, val_name):
         lkp[elements[key_idx]] = elements[val_idx]
     return  lkp
 
+#-----------------------------------------------------------------------------------------------------------------------
 
 def get_archs(el_targets, pfam_lkp):
     """Find multi-domain architectures.
@@ -85,7 +94,10 @@ def get_archs(el_targets, pfam_lkp):
     arch_lkp = {}
     dom_lkp = {}
     for ent in el_targets:
-        doms = pfam_lkp[ent[0]]
+        try:
+            doms = pfam_lkp[ent[0]]
+        except KeyError:
+            print "no doms in ", ent[0]
         arch = ', '.join(sorted(doms))
         try:
             arch_lkp[arch] += 1
@@ -102,7 +114,7 @@ def get_archs(el_targets, pfam_lkp):
                 dom_lkp[dom] = 1
     return(arch_lkp, dom_lkp, act_lkp)
 
-
+#-----------------------------------------------------------------------------------------------------------------------
 
 def get_doms(tids, params):
     """Get domains for a list of tids.
@@ -118,7 +130,7 @@ def get_doms(tids, params):
 	      ON cd.component_id = tc.component_id
             JOIN domains d
 	      ON d.domain_id = cd.domain_id
-            WHERE tc.tid IN('%s')""" %tidstr, params)
+            WHERE tc.tid IN('%s') and domain_type = 'Pfam-A'""" %tidstr, params)
     for ent in data:
         tid = ent[0]
         dom = ent[1]
@@ -128,9 +140,13 @@ def get_doms(tids, params):
             pfam_lkp[tid] = [dom]
     return pfam_lkp
 
+#-----------------------------------------------------------------------------------------------------------------------
+
+
 def count_valid(lkp, valid_doms):
     """Get count of architectures and activities covered by the mapping.
     """
+    valz = []
     for arch in lkp.keys():
         valid = False
         doms = arch.split(', ')
@@ -138,10 +154,20 @@ def count_valid(lkp, valid_doms):
             if dom in valid_doms:
                 valid = True
                 break
-        lkp[arch] = (lkp[arch], valid)
-    valid = sum([x[0] for x in lkp.values() if x[1]])
-    allz = sum([x[0] for x in lkp.values()])
-    print valid, allz
+        valz.append((lkp[arch], valid))
+    valid = sum([x[0] for x in valz if x[1]])
+    allz = sum([x[0] for x in valz])
+    valid_archs = len([x[0] for x in valz if x[1]])
+    all_archs = len(sum([x[0] for x in valz]))
+    out = open('data/log.tab', 'a')
+    timestamp = time.strftime('%d %B %Y %T', time.gmtime())
+    comment = "only binding assays"
+    release = params['release']
+    threshold = params['threshold']
+    out.write("%(valid)s\t%(allz)s\t%(release)s\t%(threshold)s\t%(comment)s\t%(timestamp)s\t%(valid_archs)s\t%(all_archs)s\n" % locals())
+    out.close()
+
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 def export_archs(arch_lkp, valid_doms, path):
@@ -161,6 +187,8 @@ def export_archs(arch_lkp, valid_doms, path):
         if len(mapped) == 0:
             mapped = False
         out.write("|%s|%s|%s|\n"%(arch[0], arch[1], mapped))
+
+#-----------------------------------------------------------------------------------------------------------------------
 
 
 def export_network(arch_lkp, valid_doms, path):
@@ -190,6 +218,8 @@ def export_network(arch_lkp, valid_doms, path):
         out.write("%s\t%s\t%s\n"%(doms[0], doms[1], lkp[link]))
     out.close()
 
+#-----------------------------------------------------------------------------------------------------------------------
+
 
 def export_attribs(arch_lkp, valid_doms, path):
     '''Write out network file.
@@ -212,6 +242,8 @@ def export_attribs(arch_lkp, valid_doms, path):
         out.write("%s\t%s\n"%(it[0], it[1]))
     out.close()
 
+#-----------------------------------------------------------------------------------------------------------------------
+
 
 def export_doms(dom_lkp, valid_doms, path):
     '''Write out identified architectures in markdown tables.
@@ -230,6 +262,7 @@ def export_doms(dom_lkp, valid_doms, path):
             mapped = True
         out.write("|%s|%s|%s|\n"%(dom, count, mapped))
 
+#-----------------------------------------------------------------------------------------------------------------------
 
 def master(version):
     """
@@ -245,9 +278,9 @@ def master(version):
     pfam_lkp = get_doms([x[0] for x in el_targets], params)
     ## Add targets with given architecture.
     (arch_lkp, dom_lkp, act_lkp) = get_archs(el_targets, pfam_lkp)
-    ## Count valid acrchitectures
+    ## Count covered acrchitectures.
     count_valid(arch_lkp, valid_doms)
-    ## Count valid activities
+    ## Count covered activities.
     count_valid(act_lkp, valid_doms)
     ##  Write multi-domain architechtures to markdown tables.
     export_archs(arch_lkp, valid_doms, 'data/multi_dom_archs_%s'% params['release'])
@@ -257,6 +290,11 @@ def master(version):
     export_network(arch_lkp, valid_doms, 'data/multi_dom_network_%s'% params['release'])
     ## export network attribute file.
     export_attribs(arch_lkp, valid_doms, 'data/multi_dom_attributes_%s'% params['release'])
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+
 if __name__ == '__main__':
         import sys
 
