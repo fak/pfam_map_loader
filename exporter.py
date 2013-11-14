@@ -66,7 +66,7 @@ def bkp_sql(params):
         sys.exit("There was a problem dumping the table")
 
 
-def loader():
+def exporter():
     """Main function to load the mapping of Pfam-A domains."""
     # Read config file.
     param_file = open('local.yaml')
@@ -89,4 +89,4 @@ if __name__ == '__main__':
     if len(sys.argv) != 1:  # the program name and the two arguments
         sys.exit("All parameters are specified in local.yaml or example.yaml, depending on line 173+174 ")
 
-    loader()
+    exporter()
