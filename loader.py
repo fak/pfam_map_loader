@@ -8,13 +8,12 @@ Note on variable names: lkp is used to represent dictionaries I was too lazy to 
 Author:
 Felix Kruger
 fkrueger@ebi.ac.uk
-
 """
 import os
 import sys
 import queryDevice
 import yaml
-
+import pgQuery
 
 def readfile(path, key_name, val_name):
     '''Read two columns from a tab-separated file into a dictionary.
@@ -76,7 +75,40 @@ def retrieve_acts(dom_string, params):
                      """ %locals() ,params )
     return acts
 
+def retrieve_acts_psql(domains, params):
+    """Run a query for act_id, tid, component_id, compd_id and domain_name.
 
+    Inputs:
+    dom_string -- A string specifying the domain names eg. "7tm_1','Pkinase','Pkinase_tyr"
+    params -- dictionary holding details of the connection string
+
+    """
+    
+    acts = pgQuery.paramquery("""
+    SELECT DISTINCT act.activity_id, ass.tid, tc.component_id, cd.compd_id, dm.domain_name
+                      FROM activities act
+                      JOIN assays ass
+                          ON ass.assay_id = act.assay_id
+                      JOIN target_dictionary td
+                          ON ass.tid = td.tid
+                      JOIN target_components tc
+                          ON ass.tid = tc.tid
+                      JOIN component_domains cd
+                          ON tc.component_id = cd.component_id
+                      JOIN domains dm
+                          ON dm.domain_id = cd.domain_id
+                     WHERE ass.assay_type IN('B','F')
+                     AND td.target_type IN('PROTEIN COMPLEX', 'SINGLE PROTEIN')
+                     AND act.standard_relation ='='
+                     AND ass.relationship_type = 'D'
+                     AND act.standard_type IN(
+                       'Ki', 'Kd', 'IC50', 'EC50', 'AC50',
+                       'log Ki', 'log Kd', 'log IC50', 'Log EC50', 'Log AC50'
+                       'pKi', 'pKd', 'pIC50', 'pEC50', 'pAC50'
+                        )
+                     AND dm.domain_name IN %(domains)s
+                     """ ,locals() ,params )
+    return acts
 
 def map_ints(acts):
     """ Map interactions to activity ids.
@@ -160,6 +192,28 @@ def upload_sql(params):
     if status != 0:
         sys.exit("Error loading table pfam_maps.""" % params)
 
+def upload_psql(params):
+    """ Load SQL table using connection string defined in global parameters.
+
+    Input:
+    params -- dictionary holding details of the connection string.
+
+    """
+    status = os.system("cp data/automatic_pfam_maps_v_%(version)s.tab data/pfam_maps.txt" % params)
+    if status != 0:
+        sys.exit("Error copying data/pfam_maps_v_%(version)s.tab to data/pfam_maps.txt" % params)
+    status = os.system("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % 
+params)
+    status = os.system("mysql -U%(user)s  -h%(host)s -p%(port)s -c 'CREATE TABLE pfam_maps(map_id INT NOT
+ NULL AUTO_INCREMENT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, m
+anual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25),  PRIMARY KEY (map_id))' %(release)s"% params)
+    if status != 0:
+        sys.exit("Error creating table pfam_maps." % params)
+    os.system("mysqlimport -u%(user)s -p%(pword)s -h%(host)s -P%(port)s --ignore-lines=1 --lines-terminated-by='\n' 
+--local %(release)s data/pfam_maps.txt" % params)
+    if status != 0:
+        sys.exit("Error loading table pfam_maps.""" % params)
+
 
 def loader():
     """Main function to load the mapping of Pfam-A domains.
@@ -178,12 +232,12 @@ def loader():
     # Load the list of validated domains.
     domains = readfile('data/valid_pfam_v_%(version)s.tab' % params, 'pfam_a', 'pfam_a')
     dom_string = "','".join(domains.keys())
-
+    domains = tuple(domains.keys())
     # Load a list of manually edited activities.
     manuals = readfile('data/manual_pfam_maps_v_%(version)s.tab' % params, 'activity_id', 'manual_flag')
 
     # Get activities for domains.
-    acts  = retrieve_acts(dom_string, params)
+    acts  = retrieve_acts_psql(domains, params)
 
     # Map interactions to activity ids.
     lkp = map_ints(acts)
