@@ -160,18 +160,17 @@ def write_table(lkp, flag_lkp, manuals, params, path):
 
     """
     out = open(path, 'w')
-    out.write("""map_id\tactivity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\n""")
-    counter = 0
+    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\n""")
     for act_id in set(lkp.keys()) - set(manuals.keys()): # Not processing maunal maps.
         compd_ids = lkp[act_id]
         (category_flag, status_flag, manual_flag) = flag_lkp[act_id]
         comment = params['comment']
         timestamp = params['timestamp']
         for compd_id in compd_ids.keys():
-            counter +=1
             domain_name = lkp[act_id][compd_id]
-            out.write("""%(counter)i\t%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\n"""%locals())
+            out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\n"""%locals())
     out.close()
+    return counter
 
 
 
@@ -201,13 +200,28 @@ def upload_psql(params):
 
     """
     status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id SERIAL  NOT NULL, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25),  PRIMARY KEY (map_id))' %(release)s"% params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25))' %(release)s"% params, shell=True)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
     params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data', 'pfam_maps.txt'])
-    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY pfam_maps FROM \'%(path)s\' DELIMITER \'\t\' CSV HEADER \"" % params, shell=True)
+    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY pfam_maps FROM \'%(path)s\' DELIMITER \'\t\'  \"" % params, shell=True)
     if status != 0:
         sys.exit("Error loading table pfam_maps.""" % params)
+
+
+def join_tables(tables, outfile):
+    with open(outfile, 'w') as outfile:
+        peek_header =open(tables[0])
+        peek_header = peek.readline()
+        map_id = 0
+        for table in tables:
+            with open(table) as infile:
+                header = infile.readline()
+                if header != peek_header:
+                    sys.exit('input tables are not same format')
+                for line in infile:
+                    map_id += 1
+	            outfile.write('\t'.join(map_id,line))
 
 
 def loader():
@@ -241,9 +255,8 @@ def loader():
     flag_lkp = flag_conflicts(lkp)
 
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
-    outfile = 'data/automatic_pfam_maps_v_%(version)s.tab' %params
-    write_table(lkp, flag_lkp, manuals, params, outfile)
-    subprocess.call('awk FNR-1 data/automatic_pfam_maps_v_%(version)s.tab data/manual_pfam_maps_v_%(version)s.tab > data/pfam_maps.txt' %params, shell=True)
+    write_table(lkp, flag_lkp, manuals, params, 'data/automatic_pfam_maps_v_%(version)s.tab' %params)
+    join_tables(['data/manual_pfam_maps_v_%(version)s.tab' %params, 'data/automatic_pfam_maps_v_%(version)s.tab' % params], 'data/pfam_maps.txt')
 
     # Load SQL table.
     upload_psql(params)
