@@ -170,7 +170,6 @@ def write_table(lkp, flag_lkp, manuals, params, path):
             domain_name = lkp[act_id][compd_id]
             out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\n"""%locals())
     out.close()
-    return counter
 
 
 
@@ -200,7 +199,7 @@ def upload_psql(params):
 
     """
     status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25))' %(release)s"% params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25))' "% params, shell=True)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
     params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data', 'pfam_maps.txt'])
@@ -211,17 +210,17 @@ def upload_psql(params):
 
 def join_tables(tables, outfile):
     with open(outfile, 'w') as outfile:
-        peek_header =open(tables[0])
-        peek_header = peek.readline()
+        prev = open(tables[0])
+        prev_header = prev.readline()
         map_id = 0
         for table in tables:
             with open(table) as infile:
                 header = infile.readline()
-                if header != peek_header:
+                if header != prev_header:
                     sys.exit('input tables are not same format')
                 for line in infile:
                     map_id += 1
-	            outfile.write('\t'.join(map_id,line))
+	            outfile.write('\t'.join([str(map_id),line]))
 
 
 def loader():
