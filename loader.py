@@ -10,6 +10,7 @@ Felix Kruger
 fkrueger@ebi.ac.uk
 """
 import os
+import subprocess
 import sys
 import queryDevice
 import yaml
@@ -199,18 +200,16 @@ def upload_psql(params):
     params -- dictionary holding details of the connection string.
 
     """
-    status = os.system("cp data/automatic_pfam_maps_v_%(version)s.tab data/pfam_maps.txt" % params)
+    import subprocess
+    status = subprocess.call("cp data/automatic_pfam_maps_v_%(version)s.tab data/pfam_maps.txt" % params, shell=True)
     if status != 0:
         sys.exit("Error copying data/pfam_maps_v_%(version)s.tab to data/pfam_maps.txt" % params)
-    status = os.system("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % 
-params)
-    status = os.system("mysql -U%(user)s  -h%(host)s -p%(port)s -c 'CREATE TABLE pfam_maps(map_id INT NOT
- NULL AUTO_INCREMENT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, m
-anual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25),  PRIMARY KEY (map_id))' %(release)s"% params)
+    status = subprocess.Popen("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id SERIAL  NOT NULL, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25),  PRIMARY KEY (map_id))' %(release)s"% params, shell=True)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
-    os.system("mysqlimport -u%(user)s -p%(pword)s -h%(host)s -P%(port)s --ignore-lines=1 --lines-terminated-by='\n' 
---local %(release)s data/pfam_maps.txt" % params)
+    params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data', 'pfam_maps.txt'])
+    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY pfam_maps FROM \'%(path)s\' DELIMITER \'\t\' CSV HEADER \"" % params, shell=True)
     if status != 0:
         sys.exit("Error loading table pfam_maps.""" % params)
 
@@ -248,10 +247,10 @@ def loader():
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
     outfile = 'data/automatic_pfam_maps_v_%(version)s.tab' %params
     write_table(lkp, flag_lkp, manuals, params, outfile)
-    os.system('awk FNR-1 data/automatic_pfam_maps_v_%(version)s.tab data/manual_pfam_maps_v_%(version)s.tab > pfam_maps.txt' %params)
+    subprocess.call('awk FNR-1 data/automatic_pfam_maps_v_%(version)s.tab data/manual_pfam_maps_v_%(version)s.tab > pfam_maps.txt' %params, shell=True)
 
     # Load SQL table.
-    upload_sql(params)
+    upload_psql(params)
 
 if __name__ == '__main__':
     import sys
