@@ -200,11 +200,7 @@ def upload_psql(params):
     params -- dictionary holding details of the connection string.
 
     """
-    import subprocess
-    status = subprocess.call("cp data/automatic_pfam_maps_v_%(version)s.tab data/pfam_maps.txt" % params, shell=True)
-    if status != 0:
-        sys.exit("Error copying data/pfam_maps_v_%(version)s.tab to data/pfam_maps.txt" % params)
-    status = subprocess.Popen("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
     status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id SERIAL  NOT NULL, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25),  PRIMARY KEY (map_id))' %(release)s"% params, shell=True)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
@@ -247,7 +243,7 @@ def loader():
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
     outfile = 'data/automatic_pfam_maps_v_%(version)s.tab' %params
     write_table(lkp, flag_lkp, manuals, params, outfile)
-    subprocess.call('awk FNR-1 data/automatic_pfam_maps_v_%(version)s.tab data/manual_pfam_maps_v_%(version)s.tab > pfam_maps.txt' %params, shell=True)
+    subprocess.call('awk FNR-1 data/automatic_pfam_maps_v_%(version)s.tab data/manual_pfam_maps_v_%(version)s.tab > data/pfam_maps.txt' %params, shell=True)
 
     # Load SQL table.
     upload_psql(params)
