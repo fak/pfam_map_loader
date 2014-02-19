@@ -36,7 +36,7 @@ def write_table(acts, path):
 
     """
     out = open(path, 'w')
-    out.write("""map_id\tactivity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\n""")
+    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\n""")
     for act in acts:
         # map_id = act[0] this value is generated from scratch in load.py
         act_id = act[1]
@@ -78,11 +78,9 @@ def exporter():
     acts  = retrieve_acts(params)
 
     # Write activity on new manual_pfam_maps file
-    path = 'data/manual_pfam_maps_v_%(nextversion)s.tab' %params
+    path = 'data/manual_pfam_maps_v_%(version)s.tab' %params
     write_table(acts, path)
 
-    # Dump SQL table.
-    bkp_sql(params)
 
 if __name__ == '__main__':
     import sys
