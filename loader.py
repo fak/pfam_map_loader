@@ -208,7 +208,7 @@ def upload_psql(params):
         sys.exit("Error loading table pfam_maps.""" % params)
 
 
-def join_tables(tables, outfile):
+def append_table(tables, outfile):
     with open(outfile, 'w') as outfile:
         prev = open(tables[0])
         prev_header = prev.readline()
@@ -255,7 +255,7 @@ def loader():
 
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
     write_table(lkp, flag_lkp, manuals, params, 'data/automatic_pfam_maps_v_%(version)s.tab' %params)
-    join_tables(['data/manual_pfam_maps_v_%(version)s.tab' %params, 'data/automatic_pfam_maps_v_%(version)s.tab' % params], 'data/pfam_maps.txt')
+    append_table(['data/manual_pfam_maps_v_%(version)s.tab' %params, 'data/automatic_pfam_maps_v_%(version)s.tab' % params], 'data/pfam_maps.txt')
 
     # Load SQL table.
     upload_psql(params)
