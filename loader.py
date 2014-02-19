@@ -43,7 +43,10 @@ def readfile(path, key_name, val_name):
 
 
 def retrieve_acts_psql(domains, params):
-    """Run a query for act_id, tid, component_id, compd_id and domain_name.
+    """Run a query for act_id, tid, component_id, compd_id and domain_name. 
+       This is to identify all activities associated with any given valid
+       domain. These activities are then processed with the map_ints and 
+       flag_conflicts function.
 
     Inputs:
     dom_string -- A string specifying the domain names eg. "7tm_1','Pkinase','Pkinase_tyr"
@@ -126,15 +129,16 @@ def write_table(lkp, flag_lkp, manuals, params, path):
 
     """
     out = open(path, 'w')
-    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\n""")
+    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\n""")
     for act_id in set(lkp.keys()) - set(manuals.keys()): # Not processing maunal maps.
         compd_ids = lkp[act_id]
         (category_flag, status_flag, manual_flag) = flag_lkp[act_id]
         comment = params['comment']
         timestamp = params['timestamp']
+        submitter = params['submitter']
         for compd_id in compd_ids.keys():
             domain_name = lkp[act_id][compd_id]
-            out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\n"""%locals())
+            out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\n"""%locals())
     out.close()
 
 
@@ -148,7 +152,7 @@ def upload_psql(params):
 
     """
     status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25))' "% params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25)), submitter VARCHAR(150)' "% params, shell=True)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
     params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data', 'pfam_maps.txt'])
