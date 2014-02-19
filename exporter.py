@@ -12,21 +12,10 @@ fkrueger@ebi.ac.uk
 import os
 import sys
 import time
-import queryDevice
 import pgQuery
 import yaml
 
 
-
-def retrieve_acts_mysql(params):
-    """Run a query for act_id, tid, component_id, compd_id and domain_name.
-
-    Inputs:
-    params -- dictionary holding details of the connection string
-
-    """
-    acts = queryDevice.queryDevice("SELECT * from pfam_maps WHERE manual_flag = 1 " ,params)
-    return acts
 
 
 def retrieve_acts(params):
@@ -65,17 +54,6 @@ def write_table(acts, path):
 
 
 
-def bkp_mysql(params):
-    """ Load SQL table using connection string defined in global parameters.
-
-    Input:
-    params -- dictionary holding details of the connection string.
-
-    """
-    params['timestamp'] = time.strftime('%d_%B_%Y', time.gmtime())
-    status = os.system("mysqldump -u%(user)s -p%(pword)s chembl_15 pfam_maps > data/pfam_maps_%(timestamp)s.bkp" % params)
-    if status != 0:
-        sys.exit("There was a problem dumping the table")
 
 
 def bkp_sql(params):
