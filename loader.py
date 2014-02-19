@@ -43,9 +43,9 @@ def readfile(path, key_name, val_name):
 
 
 def retrieve_acts_psql(domains, params):
-    """Run a query for act_id, tid, component_id, compd_id and domain_name. 
+    """Run a query for act_id, tid, component_id, compd_id and domain_name.
        This is to identify all activities associated with any given valid
-       domain. These activities are then processed with the map_ints and 
+       domain. These activities are then processed with the map_ints and
        flag_conflicts function.
 
     Inputs:
@@ -53,7 +53,7 @@ def retrieve_acts_psql(domains, params):
     params -- dictionary holding details of the connection string
 
     """
-    
+
     acts = pgQuery.paramquery("""
     SELECT DISTINCT act.activity_id, ass.tid, tc.component_id, cd.compd_id, dm.domain_name
                       FROM activities act
@@ -152,7 +152,7 @@ def upload_psql(params):
 
     """
     status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25)), submitter VARCHAR(150)' "% params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25), submitter VARCHAR(150))' "% params, shell=True)
     if status != 0:
         sys.exit("Error creating table pfam_maps." % params)
     params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data', 'pfam_maps.txt'])
@@ -216,6 +216,6 @@ def loader():
 if __name__ == '__main__':
     import sys
     if len(sys.argv) != 1:  # the program name and the two arguments
-        sys.exit("All parameters are specified in local.yaml or example.yaml, depending on line 173+174 ")
+        sys.exit("All parameters are specified in local.yaml or example.yaml")
 
     loader()
