@@ -23,7 +23,7 @@ def retrieve_acts(params):
     params -- dictionary holding details of the connection string
 
     """
-    acts = pgQuery.query("SELECT * from pfam_maps WHERE manual_flag = 1 " ,params)
+    acts = pgQuery.paramquery("SELECT * from pfam_maps WHERE manual_flag = 1 ", locals() ,params)
     return acts
 
 
