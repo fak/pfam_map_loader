@@ -16,8 +16,6 @@ import pgQuery
 import yaml
 
 
-
-
 def retrieve_acts(params):
     """Run a query to obtain manual mappings.
 
@@ -38,7 +36,7 @@ def write_table(acts, path):
 
     """
     out = open(path, 'w')
-    out.write("""map_id\tactivity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\n""")
+    out.write("""map_id\tactivity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\n""")
     for act in acts:
         # map_id = act[0] this value is generated from scratch in load.py
         act_id = act[1]
@@ -49,11 +47,9 @@ def write_table(acts, path):
         manual_flag = act[6]
         comment = act[7]
         timestamp = act[8]
-        out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\n"""%locals())
+        submitter = act[9]
+        out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\n"""%locals())
     out.close()
-
-
-
 
 
 def bkp_sql(params):
@@ -91,6 +87,6 @@ def exporter():
 if __name__ == '__main__':
     import sys
     if len(sys.argv) != 1:  # the program name and the two arguments
-        sys.exit("All parameters are specified in local.yaml or example.yaml, depending on line 173+174 ")
+        sys.exit("All parameters are specified in local.yaml or example.yaml ")
 
     exporter()
