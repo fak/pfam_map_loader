@@ -130,7 +130,7 @@ def write_table(lkp, flag_lkp, manuals, params, path):
     """
     out = open(path, 'w')
     out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\n""")
-    for act_id in set(lkp.keys()) - set(map(int, manuals.keys())): # Not processing maunal maps.
+    for act_id in set(map(int, lkp.keys())) - set(map(int, manuals.keys())): # Not processing maunal maps.
         compd_ids = lkp[act_id]
         (category_flag, status_flag, manual_flag) = flag_lkp[act_id]
         comment = params['comment']
