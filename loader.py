@@ -69,13 +69,8 @@ def retrieve_acts_psql(domains, params):
                           ON dm.domain_id = cd.domain_id
                      WHERE ass.assay_type IN('B','F')
                      AND td.target_type IN('PROTEIN COMPLEX', 'SINGLE PROTEIN')
-                     AND act.standard_relation ='='
                      AND ass.relationship_type = 'D'
-                     AND act.standard_type IN(
-                       'Ki', 'Kd', 'IC50', 'EC50', 'AC50',
-                       'log Ki', 'log Kd', 'log IC50', 'Log EC50', 'Log AC50'
-                       'pKi', 'pKd', 'pIC50', 'pEC50', 'pAC50'
-                        )
+                     AND act.pchembl_value IS NOT NULL
                      AND dm.domain_name IN %(domains)s
                      """ ,locals() ,params )
     return acts
