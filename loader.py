@@ -53,7 +53,6 @@ def retrieve_acts_psql(domains, params):
     params -- dictionary holding details of the connection string
 
     """
-
     acts = pgQuery.paramquery("""
     SELECT DISTINCT act.activity_id, ass.tid, tc.component_id, cd.compd_id, dm.domain_name
                       FROM activities act
@@ -136,15 +135,29 @@ def write_table(lkp, flag_lkp, manuals, params, path):
             out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\n"""%locals())
     out.close()
 
-
-
-
-def upload_psql(params):
-    """ Load SQL table using connection string defined in global parameters.
-
+def upload_valid_domains(params):
+    """
+    Load SQL table using connection string defined in global parameters.
     Input:
     params -- dictionary holding details of the connection string.
+    """
+    params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data'])
+    status = subprocess.call("tail -n +2 %(path)s/valid_pfam_v_%(version)s.tab >  %(path)s/valid_domains.txt" % params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS valid_domains'" %
+params, shell=True)
+    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE valid_domains(entry_id INT, domain_name VARCHAR(150), removed_flag INT,  evidence VARCHAR(150), timestamp VARCHAR(25), submitter VARCHAR(150))' "% params, shell=True)
+    if status != 0:
+        sys.exit("Error creating table valid_domains." % params)
+    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY valid_domains FROM \'%(path)s/valid_domains.txt\' DELIMITER \'\t\'  \"" % params, shell=True)
+    if status != 0:
+        sys.exit("Error loading table valid_domains.""" % params)
 
+
+def upload_maps(params):
+    """
+    Load SQL table using connection string defined in global parameters.
+    Input:
+    params -- dictionary holding details of the connection string.
     """
     status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
     status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25), submitter VARCHAR(150))' "% params, shell=True)
@@ -172,13 +185,9 @@ def append_table(tables, outfile):
 
 
 def loader():
-    """Main function to load the mapping of Pfam-A domains.
-
-    Inputs from command line:
-    release -- chembl release eg "chembl_12"
-    version -- version of the mapping eg 0_1
-
-"""
+    """
+    Main function to load the mapping of Pfam-A domains.
+    """
     # Read config file.
     param_file = open('local.yaml')
     #param_file = open('example.yaml')
@@ -186,7 +195,7 @@ def loader():
     param_file.close()
 
     # Load the list of validated domains.
-    domains = readfile('data/valid_pfam_v_%(version)s.tab' % params, 'pfam_a', 'pfam_a')
+    domains = readfile('data/valid_pfam_v_%(version)s.tab' % params, 'domain_name', 'domain_name')
     dom_string = "','".join(domains.keys())
     domains = tuple(domains.keys())
     # Load a list of manually edited activities.
@@ -205,8 +214,11 @@ def loader():
     write_table(lkp, flag_lkp, manuals, params, 'data/automatic_pfam_maps_v_%(version)s.tab' %params)
     append_table(['data/manual_pfam_maps_v_%(version)s.tab' %params, 'data/automatic_pfam_maps_v_%(version)s.tab' % params], 'data/pfam_maps.txt')
 
-    # Load SQL table.
-    upload_psql(params)
+    # Load pfam_maps table into db.
+    upload_maps(params)
+
+    # Load valid domains table into db.
+    upload_valid_domains(params)
 
 if __name__ == '__main__':
     import sys
