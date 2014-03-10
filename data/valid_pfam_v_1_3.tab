@@ -1,248 +1,259 @@
-pfam_a	removed	comment	timestamp
-2OG-FeII_Oxy_3	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-3Beta_HSD	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-7tm_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-AA_permease_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Abhydrolase_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Abhydrolase_6	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Abi	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Acetyltransf_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Acetyltransf_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-ACPS	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Actin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-A_deaminase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Adhes-Ig_like	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-adh_short	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-adh_short_C2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Aldedh	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Aldo_ket_red	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Alk_phosphatase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Alpha-amylase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Alpha_L_fucos	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Amidase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Amidinotransf	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Amino_oxidase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Aminotran_1_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Aminotran_3	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Aminotran_4	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Aminotran_5	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-AMP-binding	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-AMPKBI	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-An_peroxidase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Arginase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-ASC	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Asp	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Asp_Glu_race	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-ATP-synt_C	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Bcl-2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Bcl-2_BAD	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Beta-lactamase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Beta-lactamase2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-BNR_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Calc_CGRP_IAPP	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Carb_anhydrase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-CBAH	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-CD36	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Choline_kinase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Clat_adaptor_s	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-CM_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-COesterase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-COX1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-CTP_transf_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Cupin_8	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DAGK_cat	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DAHP_synth_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DAO	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-dCMP_cyt_deam_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DHFR_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DHO_dh	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DHquinase_II	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DMRL_synthase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DNA_methylase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DNA_pol_lambd_f	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-dNK	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-DSPc	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-dUTPase_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-EBP	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-ELO	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-EPSP_synthase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-ERG2_Sigma1R	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-ERO1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Esterase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Exo_endo_phos	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-FabA	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-FAD_binding_3	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-FA_desaturase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-FBPase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-FKBP_C	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Flavodoxin_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Flu_M2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Folate_carrier	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Folate_rec	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-G-alpha	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-GDA1_CD39	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-GDE_C	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glucan_synthase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_hydro_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_hydro_15	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_hydro_18	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_hydro_30	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_hydro_35	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_hydro_79n	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_hydro_85	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glycolytic	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_transf_21	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyco_transf_6	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Glyoxalase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-HCV_capsid	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Hemagglutinin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Heme_oxygenase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Herpes_TK	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-His_Phos_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Hist_deacetyl	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Histidinol_dh	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-HN	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Hormone_recep	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-H_PPase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-HSP20	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-HSP70	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-HTH_18	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Hydrolase_4	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-ICL	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-IDO	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-IF4E	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-IGPD	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-IMPDH	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Ion_trans	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-IU_nuc_hydro	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Lactamase_B	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Laminin_G_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Lipase_3	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Lipocalin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-LMWPc	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-LpxC	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-LuxS	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-MAPEG	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-MBOAT	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-MCD	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Melibiase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Metallophos	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Metallothio	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Methyltransf_3	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Methyltransf_31	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-MetJ	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-MFS_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-MIF	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Multi_Drug_Res	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-NAD_kinase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-NAD_synthase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Na_H_Exchanger	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Neur	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Neur_chan_LBD	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-NMO	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-NNMT_PNMT_TEMT	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Nramp	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Nucleoside_tran	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-OMPdecase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-P2X_receptor	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-p450	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PAF-AH_p_II	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pantoate_ligase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PAP2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PDEase_I	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PDGF	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PEPCK	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pep_deformylase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_C1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_C12	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_C13	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_C14	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_C30	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_M10	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_M2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_M24	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_M28	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_M48	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Reprolysin_5	0	Reprolysin_5 was originally Peptidase_M84 but has been renamed in a newer Pfam release	21 Aug 2013 13:54:00
-Peptidase_S10	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_S13	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_S28	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peptidase_S8	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Peripla_BP_4	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PFK	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PfkB	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PGI	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Phospholip_A2_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Phospholip_A2_2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Phosphorylase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PIG-L	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PKD_channel	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pkinase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pkinase_Tyr	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PMI_typeI	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PMM	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PNP_UDP_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-polyprenyl_synt	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Poxvirus	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Prenyltransf	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pribosyltran	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pro_CA	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pro_isomerase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pterin_bind	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-PTR2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Put_Phosphatase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Pyridoxal_deC	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-RdRP_3	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-RE_ScaI	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Rib_hydrolayse	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-RmlD_sub_bind	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-RnaseA	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-RRM_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-RrnaAD	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-rve	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-RVP	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SAM_decarbox	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SBF	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Scytalone_dh	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SDF	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SE	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Serpin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SIR2	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SKI	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-S-methyl_trans	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SNF	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Sortase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Spermine_synth	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SQS_PSY	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-SSF	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Steroid_dh	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Sugar_tr	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Sulfatase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Sulfotransfer_1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-POT1	0	POT1 was originally Telo_bind but has been renamed in the Pfam database	21 Aug 2013 13:54:00
-Tetraspannin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-TetR_N	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-TGT	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Thy1	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Thymidylate_kin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Thymidylat_synt	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-TIM	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-TK	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Transpeptidase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Transthyretin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-tRNA-synt_1e	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Trp_dioxygenase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Trypsin	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-TspO_MBR	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Tyr-DNA_phospho	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Tyrosinase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-UDG	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-UDPGT	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-V_ATPase_I	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Vitellogenin_N	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-Y_phosphatase	0	originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/	06 Aug 2013 14:04:55
-7tm_3	0	references pending
-ANF_receptor	0	references pending
-Lig_chan	0	references pending
-7tm_2	0	references pending
-SH2	0	references pending
+entry_id	domain_name	removed_flag	comment	timestamp	submitter
+1	2OG-FeII_Oxy_3	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+2	3Beta_HSD	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+3	7tm_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+4	AA_permease_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+5	Abhydrolase_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+6	Abhydrolase_6	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+7	Abi	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+8	Acetyltransf_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+9	Acetyltransf_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+10	ACPS	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+11	Actin	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+12	A_deaminase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+13	Adhes-Ig_like	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+14	adh_short	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+15	adh_short_C2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+16	Aldedh	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+17	Aldo_ket_red	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+18	Alk_phosphatase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+19	Alpha-amylase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+20	Alpha_L_fucos	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+21	Amidase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+22	Amidinotransf	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+23	Amino_oxidase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+24	Aminotran_1_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+25	Aminotran_3	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+26	Aminotran_4	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+27	Aminotran_5	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+28	AMP-binding	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+29	AMPKBI	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+30	An_peroxidase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+31	Arginase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+32	ASC	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+33	Asp	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+34	Asp_Glu_race	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+35	ATP-synt_C	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+36	Bcl-2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+37	Bcl-2_BAD	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+38	Beta-lactamase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+39	Beta-lactamase2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+40	BNR_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+41	Calc_CGRP_IAPP	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+42	Carb_anhydrase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+43	CBAH	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+44	CD36	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+45	Choline_kinase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+46	Clat_adaptor_s	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+47	CM_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+48	COesterase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+49	COX1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+50	CTP_transf_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+51	Cupin_8	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+52	DAGK_cat	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+53	DAHP_synth_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+54	DAO	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+55	dCMP_cyt_deam_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+56	DHFR_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+57	DHO_dh	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+58	DHquinase_II	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+59	DMRL_synthase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+60	DNA_methylase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+61	DNA_pol_lambd_f	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+62	dNK	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+63	DSPc	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+64	dUTPase_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+65	EBP	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+66	ELO	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+67	EPSP_synthase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+68	ERG2_Sigma1R	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+69	ERO1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+70	Esterase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+71	Exo_endo_phos	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+72	FabA	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+73	FAD_binding_3	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+74	FA_desaturase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+75	FBPase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+76	FKBP_C	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+77	Flavodoxin_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+78	Flu_M2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+79	Folate_carrier	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+80	Folate_rec	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+81	G-alpha	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+82	GDA1_CD39	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+83	GDE_C	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+84	Glucan_synthase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+85	Glyco_hydro_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+86	Glyco_hydro_15	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+87	Glyco_hydro_18	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+88	Glyco_hydro_30	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+89	Glyco_hydro_35	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+90	Glyco_hydro_79n	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+91	Glyco_hydro_85	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+92	Glycolytic	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+93	Glyco_transf_21	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+94	Glyco_transf_6	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+95	Glyoxalase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+96	HCV_capsid	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+97	Hemagglutinin	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+98	Heme_oxygenase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+99	Herpes_TK	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+100	His_Phos_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+101	Hist_deacetyl	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+102	Histidinol_dh	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+103	HN	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+104	Hormone_recep	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+105	H_PPase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+106	HSP20	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+107	HSP70	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+108	HTH_18	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+109	Hydrolase_4	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+110	ICL	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+111	IDO	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+112	IF4E	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+113	IGPD	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+114	IMPDH	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+115	Ion_trans	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+116	IU_nuc_hydro	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+117	Lactamase_B	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+118	Laminin_G_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+119	Lipase_3	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+120	Lipocalin	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+121	LMWPc	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+122	LpxC	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+123	LuxS	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+124	MAPEG	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+125	MBOAT	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+126	MCD	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+127	Melibiase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+128	Metallophos	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+129	Metallothio	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+130	Methyltransf_3	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+131	Methyltransf_31	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+132	MetJ	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+133	MFS_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+134	MIF	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+135	Multi_Drug_Res	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+136	NAD_kinase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+137	NAD_synthase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+138	Na_H_Exchanger	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+139	Neur	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+140	Neur_chan_LBD	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+141	NMO	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+142	NNMT_PNMT_TEMT	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+143	Nramp	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+144	Nucleoside_tran	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+145	OMPdecase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+146	P2X_receptor	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+147	p450	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+148	PAF-AH_p_II	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+149	Pantoate_ligase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+150	PAP2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+151	PDEase_I	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+152	PDGF	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+153	PEPCK	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+154	Pep_deformylase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+155	Peptidase_C1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+156	Peptidase_C12	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+157	Peptidase_C13	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+158	Peptidase_C14	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+159	Peptidase_C30	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+160	Peptidase_M10	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+161	Peptidase_M2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+162	Peptidase_M24	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+163	Peptidase_M28	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+164	Peptidase_M48	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+165	Reprolysin_5	0	Reprolysin_5 was originally Peptidase_M84 but has been renamed in a newer Pfam release	21 Aug 2013 13:54:00	fak
+166	Peptidase_S10	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+167	Peptidase_S13	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+168	Peptidase_S28	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+169	Peptidase_S8	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+170	Peripla_BP_4	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+171	PFK	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+172	PfkB	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+173	PGI	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+174	Phospholip_A2_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+175	Phospholip_A2_2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+176	Phosphorylase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+177	PIG-L	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+178	PKD_channel	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+179	Pkinase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+180	Pkinase_Tyr	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+181	PMI_typeI	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+182	PMM	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+183	PNP_UDP_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+184	polyprenyl_synt	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+185	Poxvirus	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+186	Prenyltransf	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+187	Pribosyltran	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+188	Pro_CA	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+189	Pro_isomerase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+190	Pterin_bind	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+191	PTR2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+192	Put_Phosphatase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+193	Pyridoxal_deC	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+194	RdRP_3	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+195	RE_ScaI	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+196	Rib_hydrolayse	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+197	RmlD_sub_bind	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+198	RnaseA	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+199	RRM_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+200	RrnaAD	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+201	rve	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+202	RVP	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+203	SAM_decarbox	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+204	SBF	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+205	Scytalone_dh	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+206	SDF	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+207	SE	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+208	Serpin	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+209	SIR2	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+210	SKI	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+211	S-methyl_trans	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+212	SNF	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+213	Sortase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+214	Spermine_synth	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+215	SQS_PSY	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+216	SSF	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+217	Steroid_dh	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+218	Sugar_tr	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+219	Sulfatase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+220	Sulfotransfer_1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+221	POT	0	POT1 was originally Telo_bind but has been renamed in the Pfam database	21 Aug 2013 13:54:0	fak
+222	Tetraspannin	0	doi:10.1186/1471-2105-13-S17-S1	06 Aug 2013 14:04:55	fak
+223	TetR_N	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+224	TGT	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+225	Thy1	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+226	Thymidylate_kin	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+227	Thymidylat_synt	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+228	TIM	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+229	TK	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+230	Transpeptidase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+231	Transthyretin	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+232	tRNA-synt_1e	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+233	Trp_dioxygenase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+234	Trypsin	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+235	TspO_MBR	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+236	Tyr-DNA_phospho	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+237	Tyrosinase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+238	UDG	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+239	UDPGT	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+240	V_ATPase_I	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+241	Vitellogenin_N	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+242	Y_phosphatase	0	doi:10.1186/1471-2105-13-S17-S11	06 Aug 2013 14:04:55	fak
+243	7tm_3	0	doi: 10.2174/157015907781695982	07 March 20114:52:00	fak
+244	7tm_3	0	doi: 10.1124/pr.109.002501	07 March 2014:52:00	fak
+245	7tm_3	0	doi: 10.1016/j.bcp.2012.04.013	07 March 20114:52:00	fak
+246	ANF_receptor	0	doi: 10.1038/35039564	07 March 20114:52:00	fak
+247	ANF_receptor	0	doi: 10.1124/mol.56.2.448	07 March 20114:52:00	fak
+248	ANF_receptor	0	doi: 10.2174/157015907781695919	07 March 20114:52:00	fak
+249	ANF_receptor	0	doi: 10.1074/jbc.M406164/200	07 March 20114:52:00	fak
+250	ANF_receptor	0	doi: 10.1007/s00213-005-2200-z	07 March 20114:52:00	fak
+251	ANF_receptor	0	doi: 10.1124/mol.108.050971	07 March 20114:52:00	fak
+252	Lig_chan	0	doi: 10.1016/S0896-6273(00)00094-5	07 March 20114:52:00	fak
+253	Lig_chan	0	doi: 10.1016/j.jmb.2011.08.043	07 March 20114:52:00	fak
+254	7tm_2	0	doi: 10.1074/jbc.271.36.22146	07 March 20114:52:00	fak
+255	7tm_2	0	doi: 10.1038/nature12393	07 March 20114:52:00   	fak
+256	SH2	0	doi: 10.1016/j.bbapap.2004.10.005	07 March 20114:52:00	fak
+257	SH2	0	doi: 10.1002/prot.22119	07 March 20114:52:00	fak
+258	SH2	0	doi: 10.1039/c3cs35449k	07 March 20114:52:00	fak
