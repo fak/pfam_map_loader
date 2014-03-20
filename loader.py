@@ -13,7 +13,8 @@ import os
 import subprocess
 import sys
 import yaml
-import pgQuery
+import pg2_wrapper
+
 
 def readfile(path, key_name, val_name):
     '''Read two columns from a tab-separated file into a dictionary.
@@ -38,8 +39,6 @@ def readfile(path, key_name, val_name):
         elements = line.rstrip().split('\t')
         lkp[elements[key_idx]] = elements[val_idx]
     return  lkp
-
-
 
 
 def retrieve_acts_psql(domains, params):
@@ -91,8 +90,6 @@ def map_ints(acts):
             lkp[act_id][compd_id]=domain_name
     return lkp
 
-
-
 def flag_conflicts(lkp):
     """Assign a set of flags to each activity: category, status, manual.
 
@@ -110,8 +107,6 @@ def flag_conflicts(lkp):
             elif len(set(lkp[act_id].values())) == 1:
                 flag_lkp[act_id] = (1,1,0) # multiple instances of one val. dom.
     return flag_lkp
-
-
 
 def write_table(lkp, flag_lkp, manuals, params, path):
     """ Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag.
@@ -135,54 +130,82 @@ def write_table(lkp, flag_lkp, manuals, params, path):
             out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\n"""%locals())
     out.close()
 
-def upload_valid_domains(params):
+#def upload_valid_domains(params):
+#    """
+#    Load SQL table using connection string defined in global parameters.
+#    Input:
+#    params -- dictionary holding details of the connection string.
+#    """
+#    params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data'])
+#    status = subprocess.call("tail -n +2 data/%(filename)s >  data/filename" % params, shell=True)
+#    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS valid_domains'" %
+#params, shell=True)
+#    status = subprocess.call("""psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c
+#    'CREATE TABLE valid_domains (
+#    entry_id INTEGER NOT NULL,
+#    domain_name VARCHAR(150) NOT NULL,
+#    hold_flag INTEGER NOT NULL,
+#    evidence VARCHAR(250) NOT NULL,
+#    timestamp VARCHAR(25) NOT NULL,
+#    submitter VARCHAR(250) NOT NULL'"""%params, shell=True)
+#    if status != 0:
+#        sys.exit("Error creating table valid_domains." % params)
+#    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY valid_domains FROM \'%(path)s/valid_domains.txt\' DELIMITER \'\t\'  \"" % params, shell=True)
+#    if status != 0:
+#        sys.exit("Error loading table valid_domains.""" % params)
+
+
+
+def upload_table(table_name, file_path, create_call, params):
     """
     Load SQL table using connection string defined in global parameters.
     Input:
     params -- dictionary holding details of the connection string.
     """
-    params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data'])
-    status = subprocess.call("tail -n +2 %(path)s/valid_pfam_v_%(version)s.tab >  %(path)s/valid_domains.txt" % params, shell=True)
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS valid_domains'" %
-params, shell=True)
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE valid_domains(entry_id INT, domain_name VARCHAR(150), removed_flag INT,  evidence VARCHAR(150), timestamp VARCHAR(25), submitter VARCHAR(150))' "% params, shell=True)
-    if status != 0:
-        sys.exit("Error creating table valid_domains." % params)
-    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY valid_domains FROM \'%(path)s/valid_domains.txt\' DELIMITER \'\t\'  \"" % params, shell=True)
-    if status != 0:
-        sys.exit("Error loading table valid_domains.""" % params)
+    file_path = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), file_path])
+    status = subprocess.call("tail -n +2 %(file_path)s >  %(file_path)s.nohead" % locals(), shell=True)
+    pg2_wrapper.sql_execute("""DROP TABLE IF EXISTS %s""" % table_name, [], params)
+    pg2_wrapper.sql_execute(create_call, locals(), params)
+    pg2_wrapper.sql_execute("""COPY %s FROM '%s'""" % (table_name, file_path), [], params)
+    return
 
-
-def upload_maps(params):
-    """
-    Load SQL table using connection string defined in global parameters.
-    Input:
-    params -- dictionary holding details of the connection string.
-    """
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
-    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25), submitter VARCHAR(150))' "% params, shell=True)
-    if status != 0:
-        sys.exit("Error creating table pfam_maps." % params)
-    params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data', 'pfam_maps.txt'])
-    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY pfam_maps FROM \'%(path)s\' DELIMITER \'\t\'  \"" % params, shell=True)
-    if status != 0:
-        sys.exit("Error loading table pfam_maps.""" % params)
+#def upload_maps(params):
+#    """
+#    Load SQL table using connection string defined in global parameters.
+#    Input:
+#    params -- dictionary holding details of the connection string.
+#    """
+#    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'DROP TABLE IF EXISTS pfam_maps'" % params, shell=True)
+#    status = subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c 'CREATE TABLE pfam_maps(map_id INT, activity_id INT, compd_id INT, domain_name VARCHAR(100), category_flag INT, status_flag INT, manual_flag INT, comment VARCHAR(150), timestamp VARCHAR(25), submitter VARCHAR(150))' "% params, shell=True)
+#    if status != 0:
+#        sys.exit("Error creating table pfam_maps." % params)
+#    params['path'] = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), 'data', 'pfam_maps.txt'])
+#    subprocess.call("psql -U%(user)s  -h%(host)s -p%(port)s -d%(release)s -c \"COPY pfam_maps FROM \'%(path)s\' DELIMITER \'\t\'  \"" % params, shell=True)
+#    if status != 0:
+#        sys.exit("Error loading table pfam_maps.""" % params)
 
 
 def append_table(tables, outfile):
     with open(outfile, 'w') as outfile:
         prev = open(tables[0])
         prev_header = prev.readline()
-        map_id = 0
+        outfile.write(prev_header)
         for table in tables:
             with open(table) as infile:
                 header = infile.readline()
                 if header != prev_header:
                     sys.exit('input tables are not same format')
                 for line in infile:
-                    map_id += 1
-	            outfile.write('\t'.join([str(map_id),line]))
+	            outfile.write(line)
 
+def add_pk(table, col_name):
+    with open(outfile, 'w') as outfile:
+        infile = open(table)
+        header = infile.readline()
+        header = '\t'.join([col_name, header])
+        outfile.write(header)
+        for i, line in enumerate(infile):
+            outfile.write('\t'.join([str(i),line))
 
 def loader():
     """
@@ -190,7 +213,6 @@ def loader():
     """
     # Read config file.
     param_file = open('local.yaml')
-    #param_file = open('example.yaml')
     params = yaml.safe_load(param_file)
     param_file.close()
 
@@ -198,6 +220,7 @@ def loader():
     domains = readfile('data/valid_pfam_v_%(version)s.tab' % params, 'domain_name', 'domain_name')
     dom_string = "','".join(domains.keys())
     domains = tuple(domains.keys())
+
     # Load a list of manually edited activities.
     manuals = readfile('data/manual_pfam_maps_v_%(version)s.tab' % params, 'activity_id', 'manual_flag')
 
@@ -213,12 +236,52 @@ def loader():
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
     write_table(lkp, flag_lkp, manuals, params, 'data/automatic_pfam_maps_v_%(version)s.tab' %params)
     append_table(['data/manual_pfam_maps_v_%(version)s.tab' %params, 'data/automatic_pfam_maps_v_%(version)s.tab' % params], 'data/pfam_maps.txt')
-
-    # Load pfam_maps table into db.
-    upload_maps(params)
+    add_pk('data/pfam_maps.txt', 'map_id')
 
     # Load valid domains table into db.
-    upload_valid_domains(params)
+    table_name = 'pfam_maps'
+    file_path = 'data/pfam_maps_v_%(version)s.tab' % params
+    # The create call can be created using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp 
+    create_all = """CREATE TABLE pfam_maps (
+                    map_id INTEGER NOT NULL,
+                    activity_id INTEGER NOT NULL, 
+                	compd_id INTEGER NOT NULL, 
+                	domain_name VARCHAR(150) NOT NULL, 
+                	category_flag INTEGER NOT NULL, 
+                	status_flag INTEGER NOT NULL, 
+                	manual_flag INTEGER NOT NULL, 
+                	comment VARCHAR(250) NOT NULL, 
+                	timestamp DATETIME NOT NULL, 
+                	submitter VARCHAR(25) NOT NULL
+                    )"""
+    upload_table(table_name, file_path,  create_call,  params)
+
+    # Load valid domains table into db.
+    table_name = 'valid_domains'
+    file_path = 'data/valid_pfam_v_%(version)s.tab' % params
+    # The create call can be created using $> head -n 2000 data/valid_pfam_v_1_3.tab > tmp | csvsql --table valid_domains tmp 
+    create_call = """CREATE TABLE valid_domains (
+                    entry_id INTEGER NOT NULL,
+                    domain_name VARCHAR(150) NOT NULL,
+                    hold_flag INTEGER NOT NULL,
+                    evidence VARCHAR(250) NOT NULL,
+                    timestamp VARCHAR(25) NOT NULL,
+                    submitter VARCHAR(250) NOT NULL)"""
+    upload_table(table_name, file_path,  create_call,  params)
+
+    # Load held_domains table into db.
+    table_name = 'held_domains'
+    file_path = 'data/valid_pfam_v_%(version)s.tab' % params
+    # The create call can be created using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp
+    create_call = """ CREATE TABLE held_domains (
+                      entry_id INTEGER NOT NULL, 
+                      domain_name VARCHAR(150) NOT NULL, 
+                      comment VARCHAR(250) NOT NULL, 
+                      timestamp DATETIME NOT NULL, 
+                      submitter VARCHAR(25) NOT NULL, 
+                      proposal VARCHAR(450) NOT NULL
+                      )"""
+    upload_table(table_name, file_path,  create_call,  params)
 
 if __name__ == '__main__':
     import sys
