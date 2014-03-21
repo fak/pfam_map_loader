@@ -166,7 +166,7 @@ def upload_table(table_name, file_path, create_call, params):
     status = subprocess.call("tail -n +2 %(file_path)s >  %(file_path)s.nohead" % locals(), shell=True)
     pg2_wrapper.sql_execute("""DROP TABLE IF EXISTS %s""" % table_name, [], params)
     pg2_wrapper.sql_execute(create_call, locals(), params)
-    pg2_wrapper.sql_execute("""COPY %s FROM '%s'""" % (table_name, file_path), [], params)
+    pg2_wrapper.sql_execute("""COPY %s FROM '%s'""" % (table_name, file_path + '.nohead'), [], params)
     return
 
 #def upload_maps(params):
@@ -199,13 +199,16 @@ def append_table(tables, outfile):
 	            outfile.write(line)
 
 def add_pk(table, col_name):
-    with open(outfile, 'w') as outfile:
+    outfile = table + '.tmp'
+    with open(outfile, 'w') as out:
         infile = open(table)
         header = infile.readline()
         header = '\t'.join([col_name, header])
-        outfile.write(header)
-        for i, line in enumerate(infile):
-            outfile.write('\t'.join([str(i),line))
+        out.write(header)
+        for i, line in enumerate(infile, start=1):
+            out.write('\t'.join([str(i),line]))
+        infile.close()
+    subprocess.call("mv %(outfile)s %(table)s" % locals(), shell=True)
 
 def loader():
     """
@@ -235,14 +238,14 @@ def loader():
 
     # Write a table containing activity_id, domain_id, tid, conflict_flag, type_flag
     write_table(lkp, flag_lkp, manuals, params, 'data/automatic_pfam_maps_v_%(version)s.tab' %params)
-    append_table(['data/manual_pfam_maps_v_%(version)s.tab' %params, 'data/automatic_pfam_maps_v_%(version)s.tab' % params], 'data/pfam_maps.txt')
-    add_pk('data/pfam_maps.txt', 'map_id')
+    append_table(['data/manual_pfam_maps_v_%(version)s.tab' %params, 'data/automatic_pfam_maps_v_%(version)s.tab' % params], 'data/pfam_maps_v_%(version)s.tab' %params)
+    add_pk('data/pfam_maps_v_%(version)s.tab' % params, 'map_id')
 
     # Load valid domains table into db.
     table_name = 'pfam_maps'
     file_path = 'data/pfam_maps_v_%(version)s.tab' % params
     # The create call can be created using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp 
-    create_all = """CREATE TABLE pfam_maps (
+    create_call = """CREATE TABLE pfam_maps (
                     map_id INTEGER NOT NULL,
                     activity_id INTEGER NOT NULL, 
                 	compd_id INTEGER NOT NULL, 
@@ -251,7 +254,7 @@ def loader():
                 	status_flag INTEGER NOT NULL, 
                 	manual_flag INTEGER NOT NULL, 
                 	comment VARCHAR(250) NOT NULL, 
-                	timestamp DATETIME NOT NULL, 
+                	timestamp TIMESTAMP NOT NULL, 
                 	submitter VARCHAR(25) NOT NULL
                     )"""
     upload_table(table_name, file_path,  create_call,  params)
@@ -265,7 +268,7 @@ def loader():
                     domain_name VARCHAR(150) NOT NULL,
                     hold_flag INTEGER NOT NULL,
                     evidence VARCHAR(250) NOT NULL,
-                    timestamp VARCHAR(25) NOT NULL,
+                    timestamp TIMESTAMP NOT NULL,
                     submitter VARCHAR(250) NOT NULL)"""
     upload_table(table_name, file_path,  create_call,  params)
 
@@ -277,7 +280,7 @@ def loader():
                       entry_id INTEGER NOT NULL, 
                       domain_name VARCHAR(150) NOT NULL, 
                       comment VARCHAR(250) NOT NULL, 
-                      timestamp DATETIME NOT NULL, 
+                      timestamp TIMESTAMP NOT NULL, 
                       submitter VARCHAR(25) NOT NULL, 
                       proposal VARCHAR(450) NOT NULL
                       )"""
