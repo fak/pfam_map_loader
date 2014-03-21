@@ -52,7 +52,7 @@ def retrieve_acts_psql(domains, params):
     params -- dictionary holding details of the connection string
 
     """
-    acts = pgQuery.paramquery("""
+    acts = pg2_wrapper.sql_query("""
     SELECT DISTINCT act.activity_id, ass.tid, tc.component_id, cd.compd_id, dm.domain_name
                       FROM activities act
                       JOIN assays ass
@@ -266,7 +266,6 @@ def loader():
     create_call = """CREATE TABLE valid_domains (
                     entry_id INTEGER NOT NULL,
                     domain_name VARCHAR(150) NOT NULL,
-                    hold_flag INTEGER NOT NULL,
                     evidence VARCHAR(250) NOT NULL,
                     timestamp TIMESTAMP NOT NULL,
                     submitter VARCHAR(250) NOT NULL)"""
@@ -274,7 +273,7 @@ def loader():
 
     # Load held_domains table into db.
     table_name = 'held_domains'
-    file_path = 'data/valid_pfam_v_%(version)s.tab' % params
+    file_path = 'data/held_pfam_v_%(version)s.tab' % params
     # The create call can be created using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp
     create_call = """ CREATE TABLE held_domains (
                       entry_id INTEGER NOT NULL, 
