@@ -12,7 +12,7 @@ fkrueger@ebi.ac.uk
 import os
 import sys
 import time
-import pgQuery
+import pg2_wrapper
 import yaml
 
 
@@ -23,7 +23,7 @@ def retrieve_acts(params):
     params -- dictionary holding details of the connection string
 
     """
-    acts = pgQuery.paramquery("SELECT * from pfam_maps WHERE manual_flag = 1 ", locals() ,params)
+    acts = pg2_wrapper.sql_query("SELECT * from pfam_maps WHERE manual_flag = 1 ", locals() ,params)
     return acts
 
 
