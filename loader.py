@@ -84,10 +84,10 @@ def map_ints(acts):
     for act in acts:
         (act_id, tid, component_id, compd_id, domain_name, domain_id) = act
         try:
-            lkp[act_id][compd_id]=domain_id
+            lkp[act_id][compd_id]=(domain_id, domain_name)
         except KeyError:
             lkp[act_id] ={}
-            lkp[act_id][compd_id]=domain_id
+            lkp[act_id][compd_id]=(domain_id, domain_name)
     return lkp
 
 def flag_conflicts(lkp):
@@ -126,7 +126,7 @@ def write_table(lkp, flag_lkp, manuals, params, path):
         timestamp = params['timestamp']
         submitter = params['submitter']
         for compd_id in compd_ids.keys():
-            domain_name = lkp[act_id][compd_id]
+            (domain_id, domain_name) = lkp[act_id][compd_id]
             out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\t%(domain_id)s\n"""%locals())
     out.close()
 
