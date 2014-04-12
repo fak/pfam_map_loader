@@ -36,7 +36,7 @@ def write_table(acts, path):
 
     """
     out = open(path, 'w')
-    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\n""")
+    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\tdomain_id\n""")
     for act in acts:
         # map_id = act[0] this value is generated from scratch in load.py
         act_id = act[1]
@@ -48,21 +48,10 @@ def write_table(acts, path):
         comment = act[7]
         timestamp = act[8]
         submitter = act[9]
-        out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\n"""%locals())
+        domain_id = act[10]
+        out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\t%(domain_id)s\n"""%locals())
     out.close()
 
-
-def bkp_sql(params):
-    """ Load SQL table using connection string defined in global parameters.
-
-    Input:
-    params -- dictionary holding details of the connection string.
-
-    """
-    params['timestamp'] = time.strftime('%d_%B_%Y', time.gmtime())
-    status = os.system("mysqldump -u%(user)s -p%(pword)s chembl_15 pfam_maps > data/pfam_maps_%(timestamp)s.bkp" % params)
-    if status != 0:
-        sys.exit("There was a problem dumping the table")
 
 
 
