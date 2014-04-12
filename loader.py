@@ -41,7 +41,7 @@ def readfile(path, key_name, val_name):
     return  lkp
 
 
-def retrieve_acts_psql(domains, params):
+def get_acts(domains, params):
     """Run a query for act_id, tid, component_id, compd_id and domain_name.
        This is to identify all activities associated with any given valid
        domain. These activities are then processed with the map_ints and
@@ -53,7 +53,7 @@ def retrieve_acts_psql(domains, params):
 
     """
     acts = pg2_wrapper.sql_query("""
-    SELECT DISTINCT act.activity_id, ass.tid, tc.component_id, cd.compd_id, dm.domain_name
+    SELECT DISTINCT act.activity_id, ass.tid, tc.component_id, cd.compd_id, dm.domain_name, dm.domain_id
                       FROM activities act
                       JOIN assays ass
                           ON ass.assay_id = act.assay_id
@@ -82,12 +82,12 @@ def map_ints(acts):
     """
     lkp = {}
     for act in acts:
-        (act_id, tid, component_id, compd_id, domain_name) = act
+        (act_id, tid, component_id, compd_id, domain_name, domain_id) = act
         try:
-            lkp[act_id][compd_id]=domain_name
+            lkp[act_id][compd_id]=domain_id
         except KeyError:
             lkp[act_id] ={}
-            lkp[act_id][compd_id]=domain_name
+            lkp[act_id][compd_id]=domain_id
     return lkp
 
 def flag_conflicts(lkp):
@@ -118,7 +118,7 @@ def write_table(lkp, flag_lkp, manuals, params, path):
 
     """
     out = open(path, 'w')
-    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\n""")
+    out.write("""activity_id\tcompd_id\tdomain_name\tcategory_flag\tstatus_flag\tmanual_flag\tcomment\ttimestamp\tsubmitter\tdomain_id\n""")
     for act_id in set(map(int, lkp.keys())) - set(map(int, manuals.keys())): # Not processing maunal maps.
         compd_ids = lkp[act_id]
         (category_flag, status_flag, manual_flag) = flag_lkp[act_id]
@@ -127,7 +127,7 @@ def write_table(lkp, flag_lkp, manuals, params, path):
         submitter = params['submitter']
         for compd_id in compd_ids.keys():
             domain_name = lkp[act_id][compd_id]
-            out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\n"""%locals())
+            out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\t%(domain_id)s\n"""%locals())
     out.close()
 
 #def upload_valid_domains(params):
@@ -220,7 +220,7 @@ def loader():
     param_file.close()
 
     # Load the list of validated domains.
-    domains = readfile('data/valid_pfam_v_%(version)s.tab' % params, 'domain_name', 'domain_name')
+    domains = readfile('data/valid_pfam_v_%(version)s.tab' % params, 'domain_id', 'domain_id')
     dom_string = "','".join(domains.keys())
     domains = tuple(domains.keys())
 
@@ -244,7 +244,7 @@ def loader():
     # Load valid domains table into db.
     table_name = 'pfam_maps'
     file_path = 'data/pfam_maps_v_%(version)s.tab' % params
-    # The create call can be created using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp 
+    # The create call can be generated using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp 
     create_call = """CREATE TABLE pfam_maps (
                     map_id INTEGER NOT NULL,
                     activity_id INTEGER NOT NULL, 
@@ -255,26 +255,29 @@ def loader():
                 	manual_flag INTEGER NOT NULL, 
                 	comment VARCHAR(250) NOT NULL, 
                 	timestamp TIMESTAMP NOT NULL, 
-                	submitter VARCHAR(25) NOT NULL
+                	submitter VARCHAR(25) NOT NULL,
+                    domain_id INTEGER NOT NULL
                     )"""
     upload_table(table_name, file_path,  create_call,  params)
 
     # Load valid domains table into db.
     table_name = 'valid_domains'
     file_path = 'data/valid_pfam_v_%(version)s.tab' % params
-    # The create call can be created using $> head -n 2000 data/valid_pfam_v_1_3.tab > tmp | csvsql --table valid_domains tmp 
+    # The create call can be generated using $> head -n 2000 data/valid_pfam_v_1_3.tab > tmp | csvsql --table valid_domains tmp 
     create_call = """CREATE TABLE valid_domains (
                     entry_id INTEGER NOT NULL,
                     domain_name VARCHAR(150) NOT NULL,
                     evidence VARCHAR(250) NOT NULL,
                     timestamp TIMESTAMP NOT NULL,
-                    submitter VARCHAR(250) NOT NULL)"""
+                    submitter VARCHAR(250) NOT NULL,
+                    domain_id INTEGER NOT NULL
+                    )"""
     upload_table(table_name, file_path,  create_call,  params)
 
     # Load held_domains table into db.
     table_name = 'held_domains'
     file_path = 'data/held_pfam_v_%(version)s.tab' % params
-    # The create call can be created using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp
+    # The create call can be generated using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp
     create_call = """ CREATE TABLE held_domains (
                       entry_id INTEGER NOT NULL, 
                       domain_name VARCHAR(150) NOT NULL, 
