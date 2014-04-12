@@ -69,7 +69,7 @@ def get_acts(domains, params):
                      AND td.target_type IN('PROTEIN COMPLEX', 'SINGLE PROTEIN')
                      AND ass.relationship_type = 'D'
                      AND act.pchembl_value IS NOT NULL
-                     AND dm.domain_name IN %(domains)s
+                     AND dm.domain_id IN %(domains)s
                      """ ,locals() ,params )
     return acts
 
@@ -228,7 +228,7 @@ def loader():
     manuals = readfile('data/manual_pfam_maps_v_%(version)s.tab' % params, 'activity_id', 'manual_flag')
 
     # Get activities for domains.
-    acts  = retrieve_acts_psql(domains, params)
+    acts  = get_acts(domains, params)
 
     # Map interactions to activity ids.
     lkp = map_ints(acts)
@@ -244,6 +244,7 @@ def loader():
     # Load valid domains table into db.
     table_name = 'pfam_maps'
     file_path = 'data/pfam_maps_v_%(version)s.tab' % params
+
     # The create call can be generated using $> head -n 20 data/automatic_pfam_maps_v_1_3.tab > tmp | csvsql --table pfam_maps tmp 
     create_call = """CREATE TABLE pfam_maps (
                     map_id INTEGER NOT NULL,
