@@ -1,0 +1,5 @@
+entry_id	domain_name	comment	timestamp	submitter	proposal
+1	Glyco_hydro_14	The most potent of 6 recorded ligands showed IC50 of 65 micro-molar.	17 March 2014 16:12:30	fak	remove
+2	Aph-1	No ligands were found associated with Aph-1 containing single domain proteins in chembl_17.	17 March 2014 16:12:30	fak	remove
+3	Peptidase_M84	Peptidase_M84 was renamed to Reprolysin_5 in newer Pfam release	17 March 2014 16:12:30	fak	remove
+4	Telo_bind	Telo_bind was renamed to POT1 in Pfam-A	17 March 2014 16:12:30	fak	remove
