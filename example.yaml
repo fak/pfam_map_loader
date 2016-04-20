@@ -1,8 +1,11 @@
 --- # Params
-user: <enter user name>
-pword: <enter pword>
-host: <enter hostname or IP>
-port: <enter port>
+user: <user>
+pword: <pwd>
+host: <host>
+port: <port>
+version: <version ie 1_6'
+release: <chembl_21>
+submitter: 'system'
 comment: 'originates from initial implementation: http://www.biomedcentral.com/1471-2105/13/S17/S11/'
 timestamp: '06 Aug 2013 14:04:55'
 
