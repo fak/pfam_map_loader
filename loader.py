@@ -10,10 +10,11 @@ Felix Kruger
 fkrueger@ebi.ac.uk
 """
 import os
-import subprocess
+from subprocess import Popen, PIPE
 import sys
 import yaml
 import pg2_wrapper
+import shlex
 
 
 def readfile(path, key_name, val_name):
@@ -130,14 +131,23 @@ def write_table(lkp, flag_lkp, manuals, params, path):
             out.write("""%(act_id)i\t%(compd_id)i\t%(domain_name)s\t%(category_flag)i\t%(status_flag)i\t%(manual_flag)i\t%(comment)s\t%(timestamp)s\t%(submitter)s\t%(domain_id)s\n"""%locals())
     out.close()
 
+def process_file_headers(inf, out, numline=1):
+    ''' Remove file headers. '''
+    with open(out,"w") as outfile, open(inf, 'r') as infile:
+    	for i in range(numline):
+    	    infile.next()
+    	for line in infile:
+    		outfile.write(line)
+
+
 def upload_table(table_name, file_path, create_call, params):
     """
     Load SQL table using connection string defined in global parameters.
     Input:
     params -- dictionary holding details of the connection string.
     """
-    file_path = ('/').join([subprocess.check_output('pwd', shell=True).rstrip(), file_path])
-    status = subprocess.call("tail -n +2 %(file_path)s >  %(file_path)s.nohead" % locals(), shell=True)
+    file_path = os.path.join(os.getcwd(), file_path)
+    process_file_headers(file_path, file_path + '.nohead')
     pg2_wrapper.sql_execute("""DROP TABLE IF EXISTS %s""" % table_name, [], params)
     pg2_wrapper.sql_execute(create_call, locals(), params)
     pg2_wrapper.sql_load(file_path + '.nohead', table_name, '\t', params)
@@ -158,15 +168,20 @@ def append_table(tables, outfile):
 
 def add_pk(table, col_name):
     outfile = table + '.tmp'
-    with open(outfile, 'w') as out:
-        infile = open(table)
+    with open(outfile, 'w') as out, open(table, 'r') as infile:
         header = infile.readline()
         header = '\t'.join([col_name, header])
         out.write(header)
-        for i, line in enumerate(infile, start=1):
+	i = 0
+        for line in infile:
             out.write('\t'.join([str(i),line]))
+	    i += 1
         infile.close()
-    subprocess.call("mv %(outfile)s %(table)s" % locals(), shell=True)
+    cmd = 'mv %(outfile)s %(table)s' % locals()
+    cmd = shlex.split(cmd)
+    proc = Popen(cmd, stdout = PIPE, stderr=PIPE)
+    out, err = proc.communicate()
+    print out, err
 
 def loader():
     """
